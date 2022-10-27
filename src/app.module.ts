@@ -24,7 +24,7 @@ import { AuthModule } from './auth/auth.module';
       password: 'pmt@1234',
       database: 'pmt_mohsin',
       entities: [usertbl, rfidtbl, lost_historytbl, rechargetbl, usagetbl],
-      synchronize: false,
+      synchronize: true,
     }),
     UsersModule,
     RfidModule,
