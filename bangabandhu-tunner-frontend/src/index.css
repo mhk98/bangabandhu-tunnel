@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+
+.paginationBttns{
+  margin-top: 10px;
+  width: 80%;
+  height: 40px;
+  list-style: none;
+  display: flex;
+}
+.paginationBttns a{
+  padding: 6px 15px 6px 15px;
+  margin: 8px;
+  border-radius: 6px;
+  border: 1px solid lightgray;
+  cursor: pointer;
+  color: black;
+  font-weight: 700;
+}
+.paginationBttns a:hover{
+  color: white;
+  background-color: blue;
+  border: none;
+}
+
+.paginationActive a{
+  color: white;
+  background-color: blue;
+  border: none;
+}
