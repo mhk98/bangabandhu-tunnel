@@ -1,8 +1,8 @@
 import { Entity, Column, PrimaryGeneratedColumn, BaseEntity } from 'typeorm';
-  
+
 @Entity()
 export class rfidtbl {
-  @PrimaryGeneratedColumn("uuid")
+  @PrimaryGeneratedColumn('uuid')
   Card_ID: string;
 
   @Column({ length: 50 })
@@ -17,10 +17,14 @@ export class rfidtbl {
   @Column()
   Issue_Date: Date;
   @Column()
-   Expire_Date: Date;
+  Expire_Date: Date;
   @Column()
   Balance: number;
-  
   @Column()
-    status: string;
+  last_recharge_amount: number;
+  @Column({ type: 'datetime' })
+  last_recharge_time: Date;
+
+  @Column()
+  status: string;
 }

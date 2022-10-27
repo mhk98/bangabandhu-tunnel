@@ -14,8 +14,6 @@ import { UsageModule } from './usage/usage.module';
 import { usertbl } from './users/usertbl.entity';
 import { AuthModule } from './auth/auth.module';
 
-
-
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -25,17 +23,16 @@ import { AuthModule } from './auth/auth.module';
       username: 'pmt',
       password: 'pmt@1234',
       database: 'pmt_mohsin',
-      entities: [usertbl, rfidtbl,lost_historytbl,rechargetbl,usagetbl],
+      entities: [usertbl, rfidtbl, lost_historytbl, rechargetbl, usagetbl],
       synchronize: false,
-       
-   }),
-   UsersModule, 
-   RfidModule,
-   LostModule,
-   RechargeModule,
-   UsageModule,
-   AuthModule,
-   UsersModule
+    }),
+    UsersModule,
+    RfidModule,
+    LostModule,
+    RechargeModule,
+    UsageModule,
+    AuthModule,
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [AppService],

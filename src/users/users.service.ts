@@ -34,6 +34,14 @@ export class UsersService {
     return this.usersRepository.find();
   }
 
+  findManyBy(User_ID: string): Promise<usertbl[]> {
+    return this.usersRepository.find({
+      where: {
+        User_ID: User_ID,
+      },
+    });
+  }
+
   findOne(Mobile_No: string): Promise<usertbl> {
     return this.usersRepository.findOneBy({ Mobile_No: Mobile_No });
   }
@@ -48,8 +56,10 @@ export class UsersService {
     } else {
       console.log('Congratulations for signup');
     }
+
     const saltOrRounds = 10;
     const hash = await bcrypt.hash(body.pass_word, saltOrRounds);
+
     console.log(body, 'sign up data here');
     let UserEntity = await this.usersRepository.create({
       User_FirstName: body.User_FirstName,
