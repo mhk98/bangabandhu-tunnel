@@ -10,7 +10,7 @@ const Login = () => {
       Mobile_No: event.target.Mobile_No.value,
       pass_word: event.target.pass_word.value,
     };
-    fetch("http://localhost:8081/signin", {
+    fetch("http://localhost:5000/signin", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -22,13 +22,14 @@ const Login = () => {
         if (data) {
           console.log(data);
           //creating access_token and userinfo json as string because localStorage.setItem takes string key:value pair
-          const accessToken = data.access_token;
-          localStorage.setItem("token", JSON.stringify(accessToken));
-          // const userinfo = data.userInfo;
-          localStorage.setItem("userinfo", JSON.stringify(data.userInfo));
+          const userinfo = data.userInfo;
+          localStorage.setItem("userinfo", JSON.stringify(userinfo));
           // for reading the data later on front end as bellow
           // JSON.parse(localStorage['User_Information']).access_token
           // JSON.parse(localStorage['User_Information']).userIfo.User_ID
+          const accessToken = data.access_token;
+          localStorage.setItem("token", JSON.stringify(accessToken));
+          navigate('/status')
           alert("Successfully SignIn");
           
         }

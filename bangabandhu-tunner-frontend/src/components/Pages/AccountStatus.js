@@ -6,7 +6,7 @@ import ReactPaginate from "react-paginate";
 const AccountStatus = () => {
   const [lost_card, setLost_card] = useState(false);
 
-  const url = "http://localhost:8081/rfidtbl/97466";
+  const url = "http://localhost:5000/rfidtbl/97466";
   const [users, setUsers] = useState([]);
   useEffect(() => {
     fetch(url) 
