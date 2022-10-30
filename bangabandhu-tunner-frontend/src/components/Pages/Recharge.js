@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import auth from '../../firebase.init';
+import auth from '../../firebase';
 import visa from '../../images/visa.png';
 import mastercard from '../../images/mastercard.png';
 import payoneer from '../../images/payoneer.png';

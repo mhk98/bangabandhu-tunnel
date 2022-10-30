@@ -9,6 +9,8 @@ import Login from './components/Pages/Login';
 import Navbar from './components/Pages/Navbar';
 import SignUp from './components/Pages/SignUp';
 import RequireAuth from './components/Pages/RequireAuth';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 function App() {
   return (
     <div className="App">
@@ -60,6 +62,7 @@ function App() {
           }
         ></Route>
       </Routes>
+      <ToastContainer></ToastContainer>
     </div>
   );
 }

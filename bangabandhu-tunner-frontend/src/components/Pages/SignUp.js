@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -74,9 +75,11 @@ const SignUp = () => {
       .then((data) => {
         if (data) {
           console.log(data);
-          event.target.reset();
         }
       });
+
+    toast.success('Sign Up Successfully');
+    navigate('/login');
   };
 
   return (

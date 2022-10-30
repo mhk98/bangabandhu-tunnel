@@ -1,4 +1,7 @@
+// import { useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+// import Navbar from "./Navbar";
 const Login = () => {
   // console.log(client)
   const navigate = useNavigate();
@@ -20,28 +23,27 @@ const Login = () => {
         if (data) {
           console.log(data);
           //creating access_token and userinfo json as string because localStorage.setItem takes string key:value pair
-          const userinfo = data.userInfo;
-          localStorage.setItem('userinfo', JSON.stringify(userinfo));
+
+          // const userinfo = data.userInfo;
+          localStorage.setItem('userinfo', JSON.stringify(data.userInfo));
           // for reading the data later on front end as bellow
           // JSON.parse(localStorage['User_Information']).access_token
           // JSON.parse(localStorage['User_Information']).userIfo.User_ID
-          const accessToken = data.access_token;
+          let accessToken = data.access_token;
           localStorage.setItem('token', JSON.stringify(accessToken));
+          toast.success('Sign In Successfully');
           navigate('/status');
-          // alert("Successfully SignIn");
+          // alert('Successfully SignIn');
         }
       });
   };
   return (
-    <div className="my-8 grid place-content-center">
+    <div className="my-8">
       {/* Login form start */}
       <form
         onSubmit={handleUserSignIn}
-        className="w-full max-w-lg px-8 rounded-xl shadow"
+        className="flex flex-col justify-center items-center"
       >
-        <h2 className="text-[30px] font-black mb-5 text-center mt-5">
-          Login Account
-        </h2>
         {/* Email field start */}
         {/* <div className="form-control w-full max-w-xs mb-4">
           <label className="label">
@@ -103,7 +105,7 @@ const Login = () => {
         {/* Error message start */}
         {/* Error message end */}
         {/* SignUp forward link start */}
-        <p className="mt-2 mb-5">
+        <p className="mt-2">
           New to Karnafuli Tunnel?
           <Link to="/signup" className="text-[#0B5ED7] pl-2">
             Create an account
