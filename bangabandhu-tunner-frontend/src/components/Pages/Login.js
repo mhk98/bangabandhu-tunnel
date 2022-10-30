@@ -1,6 +1,4 @@
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import Navbar from "./Navbar";
+import { Link, useNavigate } from 'react-router-dom';
 const Login = () => {
   // console.log(client)
   const navigate = useNavigate();
@@ -10,10 +8,10 @@ const Login = () => {
       Mobile_No: event.target.Mobile_No.value,
       pass_word: event.target.pass_word.value,
     };
-    fetch("http://localhost:5000/signin", {
-      method: "POST",
+    fetch('http://localhost:5000/signin', {
+      method: 'POST',
       headers: {
-        "content-type": "application/json",
+        'content-type': 'application/json',
       },
       body: JSON.stringify(user),
     })
@@ -23,25 +21,27 @@ const Login = () => {
           console.log(data);
           //creating access_token and userinfo json as string because localStorage.setItem takes string key:value pair
           const userinfo = data.userInfo;
-          localStorage.setItem("userinfo", JSON.stringify(userinfo));
+          localStorage.setItem('userinfo', JSON.stringify(userinfo));
           // for reading the data later on front end as bellow
           // JSON.parse(localStorage['User_Information']).access_token
           // JSON.parse(localStorage['User_Information']).userIfo.User_ID
           const accessToken = data.access_token;
-          localStorage.setItem("token", JSON.stringify(accessToken));
-          navigate('/status')
-          alert("Successfully SignIn");
-          
+          localStorage.setItem('token', JSON.stringify(accessToken));
+          navigate('/status');
+          // alert("Successfully SignIn");
         }
       });
   };
   return (
-    <div className="my-8">
+    <div className="my-8 grid place-content-center">
       {/* Login form start */}
       <form
         onSubmit={handleUserSignIn}
-        className="flex flex-col justify-center items-center"
+        className="w-full max-w-lg px-8 rounded-xl shadow"
       >
+        <h2 className="text-[30px] font-black mb-5 text-center mt-5">
+          Login Account
+        </h2>
         {/* Email field start */}
         {/* <div className="form-control w-full max-w-xs mb-4">
           <label className="label">
@@ -103,7 +103,7 @@ const Login = () => {
         {/* Error message start */}
         {/* Error message end */}
         {/* SignUp forward link start */}
-        <p className="mt-2">
+        <p className="mt-2 mb-5">
           New to Karnafuli Tunnel?
           <Link to="/signup" className="text-[#0B5ED7] pl-2">
             Create an account
