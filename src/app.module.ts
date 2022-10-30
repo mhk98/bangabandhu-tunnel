@@ -18,11 +18,11 @@ import { AuthModule } from './auth/auth.module';
   imports: [
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: '192.168.0.111',
-      port: 3306,
-      username: 'pmt',
-      password: 'pmt@1234',
-      database: 'pmt_mohsin',
+      host: 'localhost',
+      port: 3307,
+      username: 'kabir',
+      password: 'KHAtarnak@@26',
+      database: 'toll',
       entities: [usertbl, rfidtbl, lost_historytbl, rechargetbl, usagetbl],
       synchronize: true,
     }),

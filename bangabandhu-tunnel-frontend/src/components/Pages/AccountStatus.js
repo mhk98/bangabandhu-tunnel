@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import eye from '../../images/eye.png';
+import React, { useEffect, useState } from "react";
+import eye from "../../images/eye.png";
 
-import ReactPaginate from 'react-paginate';
+import ReactPaginate from "react-paginate";
 
 const AccountStatus = () => {
   const [lost_card, setLost_card] = useState(false);
 
-  const url = 'http://localhost:5000/rfidtbl/97466';
+  const url = "http://localhost:5000/rfidtbl/97466";
   const [users, setUsers] = useState([]);
   useEffect(() => {
     fetch(url)
@@ -60,7 +60,7 @@ const AccountStatus = () => {
                       <img
                         width="25"
                         height="25"
-                        style={{ cursor: 'pointer', margin: 'auto' }}
+                        style={{ cursor: "pointer", margin: "auto" }}
                         src={eye}
                         alt=""
                       />
@@ -76,15 +76,15 @@ const AccountStatus = () => {
 
         <div className="grid place-content-center mt-5">
           <ReactPaginate
-            previousLabel={'Previous'}
+            previousLabel={"Previous"}
             pageCount={pageCount}
-            nextLabel={'Next'}
+            nextLabel={"Next"}
             onPageChange={changePage}
-            containerClassName={'paginationBttns'}
-            previousLinkClassName={'previousBttn'}
-            nextLinkClassName={'nextBttn'}
-            disabledClassName={'paginationDisabled'}
-            activeClassName={'paginationActive'}
+            containerClassName={"paginationBttns"}
+            previousLinkClassName={"previousBttn"}
+            nextLinkClassName={"nextBttn"}
+            disabledClassName={"paginationDisabled"}
+            activeClassName={"paginationActive"}
           />
         </div>
 

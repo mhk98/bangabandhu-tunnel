@@ -1,7 +1,15 @@
 import React from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Loading from "./Loading";
 
 const Navbar = () => {
+  const navigate = useNavigate();
+  let logout = () => {
+    if (localStorage.removeItem("token")) {
+      <Loading></Loading>;
+      navigate("/login");
+    }
+  };
   return (
     <>
       {/* Navbar start */}
@@ -28,29 +36,23 @@ const Navbar = () => {
               className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
             >
               <li className="text-neutral">
-                <Link to="/status">
-                  Account Status
-                </Link>
+                <Link to="/status">Account Status</Link>
               </li>
               <li className="text-neutral">
-                <Link to="/history">
-                  Account History
-                </Link>
+                <Link to="/history">Account History</Link>
               </li>
               <li className="text-neutral">
-                <Link to="/recharge">
-                  Recharge
-                </Link>
+                <Link to="/recharge">Recharge</Link>
               </li>
               <li className="text-neutral">
-                <Link to="/QA">
-                  QA
-                </Link>
+                <Link to="/QA">QA</Link>
               </li>
             </ul>
           </div>
           <Link to="/">
-            <h2 className="btn btn-ghost normal-case text-xl">Karnafuli Tunnel</h2>
+            <h2 className="btn btn-ghost normal-case text-xl">
+              Karnafuli Tunnel
+            </h2>
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
@@ -59,32 +61,20 @@ const Navbar = () => {
               <Link to="/status">Account Status</Link>
             </li>
             <li>
-              <Link to="/history">
-                Account History
-              </Link>
+              <Link to="/history">Account History</Link>
             </li>
             <li>
-              <Link to="/recharge">
-                Recharge
-              </Link>
+              <Link to="/recharge">Recharge</Link>
             </li>
             <li>
-              <Link to="/QA">
-                QA
-              </Link>
+              <Link to="/QA">QA</Link>
             </li>
           </ul>
         </div>
 
         <div className="navbar-end">
           {localStorage.getItem("token") ? (
-            <Link
-              onClick={() => {
-                localStorage.removeItem("token");
-                Navigate("/login");
-              }}
-              className="cursor-pointer btn"
-            >
+            <Link onClick={logout} className="cursor-pointer btn">
               Log out
             </Link>
           ) : (
