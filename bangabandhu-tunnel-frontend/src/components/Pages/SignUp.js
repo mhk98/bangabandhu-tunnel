@@ -5,11 +5,9 @@ import { toast } from 'react-toastify';
 const SignUp = () => {
   const navigate = useNavigate();
   const [pass_word, setPass_word] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
   const [MobileNoError, setMobileNoError] = useState(false);
-  const [cPasswordError, setCPasswordError] = useState(false);
   const [newUser, setNewUser] = useState();
 
   const handleBlur = (e) => {
@@ -40,10 +38,6 @@ const SignUp = () => {
       } else {
         setPasswordError(false);
       }
-    }
-
-    if (confirmPassword !== pass_word) {
-      setCPasswordError('password not match');
     }
 
     if (isFieldValid) {
@@ -79,7 +73,7 @@ const SignUp = () => {
       });
 
     toast.success('Sign Up Successfully');
-    navigate('/login');
+    navigate('/otp');
   };
 
   return (
@@ -91,10 +85,50 @@ const SignUp = () => {
         onSubmit={handleSubmit}
         class="w-full max-w-lg px-8 rounded-xl shadow"
       >
-        <h2 className="text-[30px] font-black mb-10 text-center mt-4">
+        <h2 className="text-[30px] font-black text-center mt-4">
           Create New Account
         </h2>
-        <div class="flex flex-wrap -mx-3 mb-6 ">
+        <hr className="mb-2 mt-2" />
+        {/*---------------------------------- mostofa eidited start--------------------------------- */}
+        <div class="flex flex-wrap -mx-3 mb-6">
+          <div class="w-full px-3">
+            <label
+              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              htmlFor="card-id"
+            >
+              Card ID
+            </label>
+            <input
+              class="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              name="card-id"
+              type="number"
+              placeholder="0000000"
+            />
+          </div>
+          <div class="w-full px-3">
+            <label
+              for="card-type"
+              class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400"
+            >
+              Card Type
+            </label>
+            <select
+              id="card-type"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            >
+              <option selected>Card Type</option>
+              <option value="etc">ETC</option>
+              <option value="rfid">RFID</option>
+            </select>
+            <div className="text-center mt-4">
+              <h2 class="block uppercase tracking-wide text-gray-700 text-xs font-bold">
+                Available Balance : 500
+              </h2>
+            </div>
+          </div>
+        </div>
+        {/*---------------------------------- mostofa eidited end--------------------------------- */}
+        <div class="flex flex-wrap -mx-3">
           <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
             <label
               class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
@@ -128,7 +162,7 @@ const SignUp = () => {
             />
           </div>
         </div>
-        <div class="flex flex-wrap -mx-3 mb-6">
+        <div class="flex flex-wrap -mx-3">
           <div class="w-full px-3">
             <label
               class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
@@ -183,24 +217,6 @@ const SignUp = () => {
             {passwordError && (
               <p className="text-red-500">password not validate</p>
             )}
-            <div class="md:w-2/3"></div>
-          </div>
-          <div class="w-full px-3">
-            <label
-              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-              htmlFor="confirmPassword"
-            >
-              Confirm Password
-            </label>
-            <input
-              class="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              type="password"
-              onBlur={handleBlur}
-              name="confirmPassword"
-              placeholder="******************"
-              required
-            />
-            {cPasswordError && <p className="text-red-500">{cPasswordError}</p>}
             <div class="md:w-2/3"></div>
           </div>
         </div>

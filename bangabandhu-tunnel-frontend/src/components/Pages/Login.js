@@ -21,25 +21,26 @@ const Login = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data) {
+        if (data.access_token) {
           console.log(data);
           //creating access_token and userinfo json as string because localStorage.setItem takes string key:value pair
 
           // const userinfo = data.userInfo;
-          localStorage.setItem('userinfo', JSON.stringify(data.userInfo));
+
           // for reading the data later on front end as bellow
           // JSON.parse(localStorage['User_Information']).access_token
           // JSON.parse(localStorage['User_Information']).userIfo.User_ID
-          let accessToken = data.access_token;
-          if (localStorage.setItem('token', JSON.stringify(accessToken))) {
-            navigate('/status');
-          } else {
-            alert('Your phone number or password invalid');
-          }
-          // toast.success("Sign In Successfully");
+          // let accessToken = data.access_token;
 
-          // alert('Successfully SignIn');
+          navigate('/status');
+
+          toast.success('Sign In Successfully');
+        } else {
+          alert('Your phone number or password is incorrect');
         }
+
+        localStorage.setItem('userinfo', JSON.stringify(data.userInfo));
+        localStorage.setItem('token', JSON.stringify(data.access_token));
       });
   };
   return (
@@ -69,7 +70,7 @@ const Login = () => {
           <input
             // onChange={(e) => setMobile_No(e.target.value)}
             name="Mobile_No"
-            type="text"
+            type="number"
             placeholder="Enter Your Phone Number"
             className="input input-bordered w-full max-w-xs"
           />
@@ -83,7 +84,7 @@ const Login = () => {
           <input
             // onChange={(e) => setPass_word(e.target.value)}
             name="pass_word"
-            type="text"
+            type="password"
             placeholder="Enter Your Password"
             className="input input-bordered w-full max-w-xs"
           />

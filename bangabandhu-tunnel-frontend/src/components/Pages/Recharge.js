@@ -17,7 +17,6 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 const Recharge = () => {
-  const [user] = useAuthState(auth);
   return (
     <div className="mt-8 grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 place-content-center mx-auto w-full">
       <div className="w-full">

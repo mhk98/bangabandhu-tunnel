@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from "react";
-import eye from "../../images/eye.png";
-
-import ReactPaginate from "react-paginate";
+import React, { useEffect, useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye } from '@fortawesome/free-solid-svg-icons';
+import Moment from 'react-moment';
+import ReactPaginate from 'react-paginate';
+import { Link } from 'react-router-dom';
 
 const AccountStatus = () => {
   const [lost_card, setLost_card] = useState(false);
 
-  const url = "http://localhost:5000/rfidtbl/97466";
+  const url = 'http://localhost:5000/rfidtbl/97466';
   const [users, setUsers] = useState([]);
   useEffect(() => {
     fetch(url)
@@ -31,64 +33,116 @@ const AccountStatus = () => {
     <div>
       {/* ---------------- Table Area Start -------------------------- */}
       <div className="overflow-x-auto px-28 mt-5">
+        {/*---------------------------------- mostofa eidited start--------------------------------- */}
         {/* ----------------Table start -------------------------- */}
-        <table className="table w-full shadow sm:rounded-lg text-center">
-          {/* -- table head -- */}
-          <thead>
-            <tr>
-              <th>Type</th>
-              <th>Card Id</th>
-              <th>Date</th>
-              <th>Last Recharge Date</th>
-              <th>Last Recharge Amount</th>
-              <th>Mark Lost</th>
-            </tr>
-          </thead>
-          <tbody>
-            {/* -- table row  -- */}
-
-            {displayPages.map((item, index) => {
-              return (
-                <tr>
-                  <td>{item.Device_Type}</td>
-                  <td>{item.User_ID}</td>
-                  <td>{item.Issue_Date}</td>
-                  <td>{item.Issue_Date}</td>
-                  <td>{item.Balance}</td>
-                  <td>
-                    <label htmlFor="lost-card-modal">
-                      <img
-                        width="25"
-                        height="25"
-                        style={{ cursor: "pointer", margin: "auto" }}
-                        src={eye}
-                        alt=""
-                      />
-                    </label>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-
+        <div className="overflow-x-auto border border-slate-400 rounded-lg">
+          <table class="min-w-full leading-normal text-center">
+            <thead className="bg-gray-200 text-[13px] text-slate-900">
+              <tr>
+                <th class="px-2 py-5 border border-slate-300 font-semibold uppercase tracking-wider">
+                  Card type
+                </th>
+                <th class="px-2 py-5 border border-slate-300 font-semibold uppercase tracking-wider">
+                  Card id
+                </th>
+                <th class="px-2 py-5 border border-slate-300 font-semibold uppercase tracking-wider">
+                  Last recharge date
+                </th>
+                <th class="px-2 py-5 border border-slate-300 font-semibold uppercase tracking-wider">
+                  Last recharge amount
+                </th>
+                <th class="px-2 py-5 border border-slate-300 font-semibold uppercase tracking-wider">
+                  balance
+                </th>
+                <th class="px-2 py-5 border border-slate-300 font-semibold uppercase tracking-wider">
+                  recharge
+                </th>
+                <th class="px-2 py-5 border border-slate-300 font-semibold uppercase tracking-wider">
+                  mark lost
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {/* -- table row  -- */}
+              {displayPages.map((item, index) => {
+                return (
+                  <tr>
+                    <td className="py-2 border border-slate-300 bg-white text-sm">
+                      <p class="text-gray-900 whitespace-no-wrap">
+                        {item.Device_Type}
+                      </p>
+                    </td>
+                    <td className="py-2 border border-slate-300 bg-white text-sm">
+                      <p class="text-gray-900 whitespace-no-wrap">
+                        {item.User_ID}
+                      </p>
+                    </td>
+                    <td className="py-2 border border-slate-300 bg-white text-sm">
+                      <p class="text-gray-900 whitespace-no-wrap">
+                        {
+                          <Moment format="DD/MM/YYYY">
+                            {item.Expire_Date}
+                          </Moment>
+                        }
+                      </p>
+                    </td>
+                    <td className="py-2 border border-slate-300 bg-white text-sm">
+                      <p class="text-gray-900 whitespace-no-wrap">
+                        {item.last_recharge_amount}
+                      </p>
+                    </td>
+                    <td className="py-2 border border-slate-300 bg-white text-sm">
+                      <p class="text-gray-900 whitespace-no-wrap">
+                        {item.Balance}
+                      </p>
+                    </td>
+                    <td className="py-2 border border-slate-300 bg-white text-sm">
+                      <p class="text-gray-900 whitespace-no-wrap">
+                        <Link to="/recharge">
+                          <p className="btn btn-sm">
+                            <small>Click</small>
+                          </p>
+                        </Link>
+                      </p>
+                    </td>
+                    <td className="py-2 border border-slate-300 bg-white text-sm">
+                      <label
+                        htmlFor="lost-card-modal"
+                        class="text-gray-900 whitespace-no-wrap"
+                      >
+                        <FontAwesomeIcon
+                          icon={faEye}
+                          style={{
+                            cursor: 'pointer',
+                            margin: 'auto',
+                            fontSize: '18px',
+                          }}
+                        />
+                      </label>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
         {/* ----------------ReactPaginate-------------------------- */}
-
         <div className="grid place-content-center mt-5">
           <ReactPaginate
-            previousLabel={"Previous"}
+            previousLabel={'Previous'}
             pageCount={pageCount}
-            nextLabel={"Next"}
+            nextLabel={'Next'}
             onPageChange={changePage}
-            containerClassName={"paginationBttns"}
-            previousLinkClassName={"previousBttn"}
-            nextLinkClassName={"nextBttn"}
-            disabledClassName={"paginationDisabled"}
-            activeClassName={"paginationActive"}
+            containerClassName={'paginationBttns'}
+            previousLinkClassName={'previousBttn'}
+            nextLinkClassName={'nextBttn'}
+            disabledClassName={'paginationDisabled'}
+            activeClassName={'paginationActive'}
           />
         </div>
-
         {/* ----------------Table End-------------------------- */}
+
+        {/*---------------------------------- mostofa eidited start--------------------------------- */}
         {/* ---------------- Add Card Area -------------------------- */}
         <div className="flex gap-4 place-content-center">
           <div className="text-center mt-5">
@@ -176,28 +230,6 @@ const AccountStatus = () => {
                 </h2>
                 {/*-------------------------Balance Transfer Card Model Form Start ---------------*/}
                 <form className="flex gap-2 mt-5">
-                  {/* --------------------------------------select active card start--------------------------------- */}
-                  <div>
-                    <select
-                      name="select_card"
-                      className="select select-bordered max-w-xs mb-5 rounded"
-                    >
-                      <option disabled selected>
-                        Active Card
-                      </option>
-                      <option value="etc">
-                        00002202 <span>Etc</span>
-                      </option>
-                      <option value="rf">
-                        00002202 <span>RfId</span>
-                      </option>
-                      <option value="etc">
-                        00002202 <span>Etc</span>
-                      </option>
-                    </select>
-                  </div>
-                  {/* --------------------------------------select active card end--------------------------------- */}
-
                   {/* --------------------------------------select lost start--------------------------------- */}
                   <div>
                     <select
@@ -219,6 +251,27 @@ const AccountStatus = () => {
                     </select>
                   </div>
                   {/* --------------------------------------select lost card end--------------------------------- */}
+                  {/* --------------------------------------select active card start--------------------------------- */}
+                  <div>
+                    <select
+                      name="select_card"
+                      className="select select-bordered max-w-xs mb-5 rounded"
+                    >
+                      <option disabled selected>
+                        Active Card
+                      </option>
+                      <option value="etc">
+                        00002202 <span>Etc</span>
+                      </option>
+                      <option value="rf">
+                        00002202 <span>RfId</span>
+                      </option>
+                      <option value="etc">
+                        00002202 <span>Etc</span>
+                      </option>
+                    </select>
+                  </div>
+                  {/* --------------------------------------select active card end--------------------------------- */}
                   <div>
                     <button
                       type="submit"

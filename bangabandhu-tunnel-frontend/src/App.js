@@ -11,14 +11,17 @@ import SignUp from './components/Pages/SignUp';
 import RequireAuth from './components/Pages/RequireAuth';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
+import Otp from './components/Pages/Otp';
+// import Otp from './components/Otp';
 function App() {
   return (
     <div className="App">
       <Navbar></Navbar>
-      {/* <Home></Home> */}
+
       <Routes>
         <Route path="/login" element={<Login></Login>}></Route>
         <Route path="/signup" element={<SignUp></SignUp>}></Route>
+        <Route path="/otp" element={<Otp></Otp>}></Route>
 
         {/* <Route path='/rgotp' element={<SignUpPhone/>}></Route> */}
         <Route

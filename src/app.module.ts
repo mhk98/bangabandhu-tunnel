@@ -13,6 +13,11 @@ import { RechargeModule } from './recharge/recharge.module';
 import { UsageModule } from './usage/usage.module';
 import { usertbl } from './users/usertbl.entity';
 import { AuthModule } from './auth/auth.module';
+// implementing table with card information
+
+import { cardModule } from './card-rfid/card.module';
+import { cardtbl } from './card-rfid/card.entity';
+
 
 @Module({
   imports: [
@@ -23,8 +28,8 @@ import { AuthModule } from './auth/auth.module';
       username: 'pmt',
       password: 'pmt@1234',
       database: 'pmt_mohsin',
-      entities: [usertbl, rfidtbl, lost_historytbl, rechargetbl, usagetbl],
-      synchronize: true,
+      entities: [usertbl, rfidtbl, lost_historytbl, rechargetbl, usagetbl,cardtbl],
+      synchronize: false,
     }),
     UsersModule,
     RfidModule,
@@ -33,6 +38,7 @@ import { AuthModule } from './auth/auth.module';
     UsageModule,
     AuthModule,
     UsersModule,
+    cardModule
   ],
   controllers: [AppController],
   providers: [AppService],
