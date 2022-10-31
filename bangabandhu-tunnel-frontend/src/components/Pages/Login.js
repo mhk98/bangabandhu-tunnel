@@ -1,7 +1,7 @@
 // import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
-import Loading from "./Loading";
+import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import Loading from './Loading';
 // import Navbar from "./Navbar";
 const Login = () => {
   // console.log(client)
@@ -12,10 +12,10 @@ const Login = () => {
       Mobile_No: event.target.Mobile_No.value,
       pass_word: event.target.pass_word.value,
     };
-    fetch("http://localhost:5000/signin", {
-      method: "POST",
+    fetch('http://localhost:5000/signin', {
+      method: 'POST',
       headers: {
-        "content-type": "application/json",
+        'content-type': 'application/json',
       },
       body: JSON.stringify(user),
     })
@@ -26,14 +26,18 @@ const Login = () => {
           //creating access_token and userinfo json as string because localStorage.setItem takes string key:value pair
 
           // const userinfo = data.userInfo;
-          localStorage.setItem("userinfo", JSON.stringify(data.userInfo));
+          localStorage.setItem('userinfo', JSON.stringify(data.userInfo));
           // for reading the data later on front end as bellow
           // JSON.parse(localStorage['User_Information']).access_token
           // JSON.parse(localStorage['User_Information']).userIfo.User_ID
           let accessToken = data.access_token;
-          localStorage.setItem("token", JSON.stringify(accessToken));
+          if (localStorage.setItem('token', JSON.stringify(accessToken))) {
+            navigate('/status');
+          } else {
+            alert('Your phone number or password invalid');
+          }
           // toast.success("Sign In Successfully");
-          navigate("/status");
+
           // alert('Successfully SignIn');
         }
       });
