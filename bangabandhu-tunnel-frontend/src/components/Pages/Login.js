@@ -1,46 +1,62 @@
 // import { useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import Loading from './Loading';
+import { public_api } from '../../Services/http.service';
 // import Navbar from "./Navbar";
 const Login = () => {
   // console.log(client)
   const navigate = useNavigate();
+  // const handleUserSignIn = (event) => {
+  //   event.preventDefault();
+  //   const user = {
+  //     Mobile_No: event.target.Mobile_No.value,
+  //     pass_word: event.target.pass_word.value,
+  //   };
+  //   public_api('auth/login', {
+  //     method: 'POST',
+  //     headers: {
+  //       'content-type': 'application/json',
+  //     },
+  //     body: JSON.stringify(user),
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       if (data.access_token) {
+  //         console.log(data);
+  //         //creating access_token and userinfo json as string because localStorage.setItem takes string key:value pair
+
+  //         // const userinfo = data.userInfo;
+
+  //         // for reading the data later on front end as bellow
+  //         // JSON.parse(localStorage['User_Information']).access_token
+  //         // JSON.parse(localStorage['User_Information']).userIfo.User_ID
+  //         // let accessToken = data.access_token;
+
+  //         navigate('/status');
+
+  //         toast.success('Sign In Successfully');
+  //       } else {
+  //         alert('Your phone number or password is incorrect');
+  //       }
+
+  //       localStorage.setItem('userinfo', JSON.stringify(data.userInfo));
+  //       localStorage.setItem('token', JSON.stringify(data.access_token));
+  //     });
+  // };
+
   const handleUserSignIn = (event) => {
     event.preventDefault();
-    const user = {
-      Mobile_No: event.target.Mobile_No.value,
-      pass_word: event.target.pass_word.value,
-    };
-    fetch('http://localhost:5000/signin', {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json',
-      },
-      body: JSON.stringify(user),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.access_token) {
-          console.log(data);
-          //creating access_token and userinfo json as string because localStorage.setItem takes string key:value pair
-
-          // const userinfo = data.userInfo;
-
-          // for reading the data later on front end as bellow
-          // JSON.parse(localStorage['User_Information']).access_token
-          // JSON.parse(localStorage['User_Information']).userIfo.User_ID
-          // let accessToken = data.access_token;
-
-          navigate('/status');
-
-          toast.success('Sign In Successfully');
-        } else {
-          alert('Your phone number or password is incorrect');
-        }
-
-        localStorage.setItem('userinfo', JSON.stringify(data.userInfo));
-        localStorage.setItem('token', JSON.stringify(data.access_token));
+    console.log('hit');
+    public_api
+      .post('auth/login', {
+        email: event.target.email.value,
+        password: event.target.password.value,
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
       });
   };
   return (
@@ -65,12 +81,12 @@ const Login = () => {
         {/* Phone field start */}
         <div className="form-control w-full max-w-xs mb-4">
           <label className="label">
-            <span className="label-text">Phone Number</span>
+            <span className="label-text">Email</span>
           </label>
           <input
             // onChange={(e) => setMobile_No(e.target.value)}
-            name="Mobile_No"
-            type="number"
+            name="email"
+            type="email"
             placeholder="Enter Your Phone Number"
             className="input input-bordered w-full max-w-xs"
           />
@@ -83,7 +99,7 @@ const Login = () => {
           </label>
           <input
             // onChange={(e) => setPass_word(e.target.value)}
-            name="pass_word"
+            name="password"
             type="password"
             placeholder="Enter Your Password"
             className="input input-bordered w-full max-w-xs"

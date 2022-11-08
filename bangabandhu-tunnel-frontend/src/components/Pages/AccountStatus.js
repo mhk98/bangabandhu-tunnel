@@ -4,15 +4,16 @@ import { faEye } from '@fortawesome/free-solid-svg-icons';
 import Moment from 'react-moment';
 import ReactPaginate from 'react-paginate';
 import { Link } from 'react-router-dom';
+// import httpServices from '../../Services/http.service';
 
 const AccountStatus = () => {
   const [lost_card, setLost_card] = useState(false);
+  // const { public_api } = httpServices;
 
-  const url = 'http://localhost:5000/rfidtbl/97466';
+  const url = 'http://localhost:3000/rfidtbl/97466';
   const [users, setUsers] = useState([]);
   useEffect(() => {
-    fetch(url)
-      .then((res) => res.json())
+    fetch('http://localhost:3000/rfidtbl/97466')
       .then((data) => setUsers(data.Rfidtbl))
       .catch((err) => {
         console.log(err);
@@ -28,6 +29,8 @@ const AccountStatus = () => {
   const changePage = ({ selected }) => {
     setPageNumber(selected);
   };
+
+  // apis.get('/auth/regiester')
 
   return (
     <div>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../firebase';
 import visa from '../../images/visa.png';
@@ -17,12 +17,44 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 const Recharge = () => {
+  const handleCheckout = (event) => {
+    event.preventDefault();
+    const info = {
+      card: event.target.card.value,
+      amount: event.target.amount.value,
+    };
+    // const email = user?.email;
+
+    fetch('http://localhost:4000/ssl-request', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify(info),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data) {
+          window.open(data);
+        }
+      });
+  };
+
+  useEffect(() => {
+    fetch('http://localhost:4000/ssl-payment-success')
+      .then((res) => res.json())
+      .then((data) => console.log('data', data));
+  }, []);
+
   return (
     <div className="mt-8 grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 place-content-center mx-auto w-full">
       <div className="w-full">
         <h2 className="text-2xl font-bold text-center">Recharge</h2>
 
-        <form className="flex flex-col items-center justify-center">
+        <form
+          className="flex flex-col items-center justify-center"
+          onSubmit={handleCheckout}
+        >
           <div className="form-control w-full max-w-xs mb-2 mt-5">
             <select class="select select-bordered w-full max-w-xs">
               <option disabled selected>
@@ -38,6 +70,19 @@ const Recharge = () => {
             </label>
             <input
               type="number"
+              name="card"
+              placeholder="Enter Your Card Number"
+              className="input input-bordered w-full max-w-xs"
+              required
+            />
+          </div>
+          <div className="form-control w-full max-w-xs mb-4">
+            <label className="label">
+              <span className="label-text font-bold">Amount</span>
+            </label>
+            <input
+              type="number"
+              name="amount"
               placeholder="Enter Your Card Number"
               className="input input-bordered w-full max-w-xs"
               required

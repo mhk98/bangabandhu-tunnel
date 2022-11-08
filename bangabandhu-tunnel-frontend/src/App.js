@@ -12,6 +12,7 @@ import RequireAuth from './components/Pages/RequireAuth';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 import Otp from './components/Pages/Otp';
+import Success from './components/Pages/Success';
 // import Otp from './components/Otp';
 function App() {
   return (
@@ -24,14 +25,7 @@ function App() {
         <Route path="/otp" element={<Otp></Otp>}></Route>
 
         {/* <Route path='/rgotp' element={<SignUpPhone/>}></Route> */}
-        <Route
-          path="/status"
-          element={
-            <RequireAuth>
-              <AccountStatus></AccountStatus>
-            </RequireAuth>
-          }
-        ></Route>
+        <Route path="/status" element={<AccountStatus></AccountStatus>}></Route>
         <Route
           path="/history"
           element={
@@ -40,14 +34,7 @@ function App() {
             </RequireAuth>
           }
         ></Route>
-        <Route
-          path="/recharge"
-          element={
-            <RequireAuth>
-              <Recharge></Recharge>
-            </RequireAuth>
-          }
-        ></Route>
+        <Route path="/recharge" element={<Recharge></Recharge>}></Route>
         <Route
           path="/home"
           element={
@@ -56,14 +43,8 @@ function App() {
             </RequireAuth>
           }
         ></Route>
-        <Route
-          path="/QA"
-          element={
-            <RequireAuth>
-              <FQAPage></FQAPage>
-            </RequireAuth>
-          }
-        ></Route>
+        <Route path="/QA" element={<FQAPage></FQAPage>}></Route>
+        <Route path="/success/:tranId" element={<Success></Success>}></Route>
       </Routes>
       <ToastContainer></ToastContainer>
     </div>
