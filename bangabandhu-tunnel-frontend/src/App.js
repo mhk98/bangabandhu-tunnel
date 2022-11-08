@@ -13,8 +13,13 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 import Otp from './components/Pages/Otp';
 import Success from './components/Pages/Success';
+import TermsAndConditions from "./components/Pages/TermsAndConditions";
+import AboutUs from "./components/Pages/AboutUs";
+import Footer from './components/Pages/Footer';
+import User_info from './components/Pages/User_info';
 // import Otp from './components/Otp';
 function App() {
+  
   return (
     <div className="App">
       <Navbar></Navbar>
@@ -23,29 +28,37 @@ function App() {
         <Route path="/login" element={<Login></Login>}></Route>
         <Route path="/signup" element={<SignUp></SignUp>}></Route>
         <Route path="/otp" element={<Otp></Otp>}></Route>
+        <Route path="/user" element={<User_info/>}></Route>
+        <Route
+          path="/terms-and-conditions"
+          element={<TermsAndConditions />}
+        ></Route>
+        <Route path="/aboutus" element={<AboutUs />}></Route>
+
 
         {/* <Route path='/rgotp' element={<SignUpPhone/>}></Route> */}
         <Route path="/status" element={<AccountStatus></AccountStatus>}></Route>
         <Route
           path="/history"
           element={
-            <RequireAuth>
+            // <RequireAuth>
               <AccountHistory></AccountHistory>
-            </RequireAuth>
+            // </RequireAuth>
           }
         ></Route>
         <Route path="/recharge" element={<Recharge></Recharge>}></Route>
         <Route
-          path="/home"
+          path="/"
           element={
-            <RequireAuth>
+            // <RequireAuth>
               <Home />
-            </RequireAuth>
+            // </RequireAuth>
           }
         ></Route>
         <Route path="/QA" element={<FQAPage></FQAPage>}></Route>
         <Route path="/success/:tranId" element={<Success></Success>}></Route>
       </Routes>
+      <Footer/>
       <ToastContainer></ToastContainer>
     </div>
   );

@@ -5,7 +5,7 @@ const Home = () => {
     <>
       <form action="#" method="POST">
               <div className="overflow-hidden sm:rounded-md text-center">
-                <div className="bg-white px-4 py-5 sm:p-6 m-28 px-8 rounded-xl bg-base-300 shadow">
+                <div className="bg-white rounded-xl">
                   <h2 className="text-[30px] font-black mt-10 mb-20">
                     Welcome to Karnafuli Tunnel
                   </h2>

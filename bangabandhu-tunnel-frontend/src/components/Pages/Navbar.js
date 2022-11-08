@@ -13,7 +13,7 @@ const Navbar = () => {
   return (
     <>
       {/* Navbar start */}
-      <div className="navbar bg-base-100 bg-neutral text-neutral-content shadow">
+      <div className="navbar bg-neutral text-neutral-content shadow">
         <div className="navbar-start">
           <div className="dropdown">
             <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -50,7 +50,7 @@ const Navbar = () => {
             </ul>
           </div>
           <Link to="/">
-            <h2 className="btn btn-ghost normal-case text-xl">
+            <h2 className="btn btn-ghost normal-case text-sm sm:text-base">
               Karnafuli Tunnel
             </h2>
           </Link>

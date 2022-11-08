@@ -52,7 +52,7 @@ const Otp = () => {
                 className="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal"
                 defaultCountry="pl"
                 containerStyle={{ width: '100%' }}
-                searchClass="search-class"
+                searchclassName="search-class"
                 searchStyle={{
                   margin: '0px',
 

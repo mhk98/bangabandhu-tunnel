@@ -40,14 +40,14 @@ const SignUpPhone = () => {
       <h2 className="text-2xl font-bold">Phone Login</h2>
       {error && <p className="text-red-500">{error}</p>}
       <form onSubmit={getOtp}>
-        {/* <div class="form-control w-full max-w-xs mt-8 mx-auto">
-          <label class="label">
-            <span class="label-text">Phone Number</span>
+        {/* <div className="form-control w-full max-w-xs mt-8 mx-auto">
+          <label className="label">
+            <span className="label-text">Phone Number</span>
           </label>
           <input
             type="text"
             placeholder="Enter Your Phone"
-            class="input input-bordered w-full max-w-xs"
+            className="input input-bordered w-full max-w-xs"
           />
         </div> */}
         <PhoneInput

@@ -1,22 +1,29 @@
-import React, { useEffect } from 'react';
-import { useAuthState } from 'react-firebase-hooks/auth';
-import auth from '../../firebase';
-import visa from '../../images/visa.png';
-import mastercard from '../../images/mastercard.png';
-import payoneer from '../../images/payoneer.png';
-import paypal from '../../images/paypal.png';
-import bkash from '../../images/bkash.png';
-import nogod from '../../images/nogod.png';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React, { useEffect } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "../../firebase";
+import visa from "../../images/visa.png";
+import mastercard from "../../images/mastercard.png";
+import payoneer from "../../images/payoneer.png";
+import paypal from "../../images/paypal.png";
+import bkash from "../../images/bkash.png";
+import nogod from "../../images/nogod.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCashRegister,
   faCheck,
   faCheckCircle,
   faCircleXmark,
   faXmarkCircle,
-} from '@fortawesome/free-solid-svg-icons';
+} from "@fortawesome/free-solid-svg-icons";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Recharge = () => {
+  const [agree, setAgree] = useState(false);
+  const checkboxHandler = () => {
+    setAgree(!agree);
+  };
+
   const handleCheckout = (event) => {
     event.preventDefault();
     const info = {
@@ -25,10 +32,10 @@ const Recharge = () => {
     };
     // const email = user?.email;
 
-    fetch('http://localhost:4000/ssl-request', {
-      method: 'POST',
+    fetch("http://localhost:4000/ssl-request", {
+      method: "POST",
       headers: {
-        'content-type': 'application/json',
+        "content-type": "application/json",
       },
       body: JSON.stringify(info),
     })
@@ -41,9 +48,9 @@ const Recharge = () => {
   };
 
   useEffect(() => {
-    fetch('http://localhost:4000/ssl-payment-success')
+    fetch("http://localhost:4000/ssl-payment-success")
       .then((res) => res.json())
-      .then((data) => console.log('data', data));
+      .then((data) => console.log("data", data));
   }, []);
 
   return (
@@ -56,7 +63,7 @@ const Recharge = () => {
           onSubmit={handleCheckout}
         >
           <div className="form-control w-full max-w-xs mb-2 mt-5">
-            <select class="select select-bordered w-full max-w-xs">
+            <select className="select select-bordered w-full max-w-xs">
               <option disabled selected>
                 Select Your Card Type
               </option>
@@ -83,13 +90,24 @@ const Recharge = () => {
             <input
               type="number"
               name="amount"
-              placeholder="Enter Your Card Number"
+              placeholder="Enter Your Amount"
               className="input input-bordered w-full max-w-xs"
               required
             />
           </div>
-
+          <div className="mb-4">
+            <input type="checkbox" id="agree" onChange={checkboxHandler} />
+            <label htmlFor="agree" className="ml-2">
+              <b>
+                I Agree To{" "}
+                <Link to="/terms-and-conditions" className="link">
+                  Terms and Conditions
+                </Link>
+              </b>
+            </label>
+          </div>
           <input
+            disabled={!agree}
             className="btn w-full max-w-xs flex justify-center"
             type="submit"
             defaultValue="Submit"

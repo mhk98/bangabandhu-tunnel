@@ -2,7 +2,7 @@ import React from 'react';
 const FQAPage = () => {
   return (
     <div>
-      <div className="overflow-x-auto pb-16 pt-5 shadow px-28 mt-5 mb-5">
+      <div className="overflow-x-auto px-8 shadow mt-5 mb-5">
         <div className="fqa-header text-center mt-5 mb-5">
           <h1 className="text-2xl mb-5 font-bold">
             Questions and Answers on Electronic Toll Collection (ETC) System

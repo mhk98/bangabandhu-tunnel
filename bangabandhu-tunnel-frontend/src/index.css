@@ -16,15 +16,14 @@ code {
     monospace;
 }
 
-
-.paginationBttns{
+.paginationBttns {
   margin-top: 10px;
   width: 80%;
   height: 40px;
   list-style: none;
   display: flex;
 }
-.paginationBttns a{
+.paginationBttns a {
   padding: 6px 15px 6px 15px;
   margin: 8px;
   border-radius: 6px;
@@ -33,13 +32,13 @@ code {
   color: black;
   font-weight: 700;
 }
-.paginationBttns a:hover{
+.paginationBttns a:hover {
   color: white;
   background-color: blue;
   border: none;
 }
 
-.paginationActive a{
+.paginationActive a {
   color: white;
   background-color: blue;
   border: none;

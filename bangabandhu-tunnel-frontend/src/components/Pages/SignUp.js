@@ -83,61 +83,61 @@ const SignUp = () => {
       {/* SignUp form start */}
       <form
         onSubmit={handleSubmit}
-        class="w-full max-w-lg px-8 rounded-xl shadow"
+        className="w-full max-w-lg px-8 rounded-xl shadow"
       >
         <h2 className="text-[30px] font-black text-center mt-4">
           Create New Account
         </h2>
         <hr className="mb-2 mt-2" />
         {/*---------------------------------- mostofa eidited start--------------------------------- */}
-        <div class="flex flex-wrap -mx-3 mb-6">
-          <div class="w-full px-3">
+        <div className="flex flex-wrap -mx-3 mb-6">
+          <div className="w-full px-3">
             <label
-              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
               htmlFor="card-id"
             >
               Card ID
             </label>
             <input
-              class="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              className="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
               name="card-id"
               type="number"
               placeholder="0000000"
             />
           </div>
-          <div class="w-full px-3">
+          <div className="w-full px-3">
             <label
               for="card-type"
-              class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400"
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400"
             >
               Card Type
             </label>
             <select
               id="card-type"
-              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             >
               <option selected>Card Type</option>
               <option value="etc">ETC</option>
               <option value="rfid">RFID</option>
             </select>
             <div className="text-center mt-4">
-              <h2 class="block uppercase tracking-wide text-gray-700 text-xs font-bold">
+              <h2 className="block uppercase tracking-wide text-gray-700 text-xs font-bold">
                 Available Balance : 500
               </h2>
             </div>
           </div>
         </div>
         {/*---------------------------------- mostofa eidited end--------------------------------- */}
-        <div class="flex flex-wrap -mx-3">
-          <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+        <div className="flex flex-wrap -mx-3">
+          <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
             <label
-              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
               htmlFor="User_FirstName"
             >
               First Name
             </label>
             <input
-              class="appearance-none block w-full text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+              className="appearance-none block w-full text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
               type="text"
               onBlur={handleBlur}
               name="User_FirstName"
@@ -145,15 +145,15 @@ const SignUp = () => {
               required
             />
           </div>
-          <div class="w-full md:w-1/2 px-3">
+          <div className="w-full md:w-1/2 px-3">
             <label
-              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
               htmlFor="User_LastName"
             >
               Last Name
             </label>
             <input
-              class="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              className="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
               type="text"
               name="User_LastName"
               onBlur={handleBlur}
@@ -162,16 +162,16 @@ const SignUp = () => {
             />
           </div>
         </div>
-        <div class="flex flex-wrap -mx-3">
-          <div class="w-full px-3">
+        <div className="flex flex-wrap -mx-3">
+          <div className="w-full px-3">
             <label
-              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
               htmlFor="User_Email"
             >
               Email
             </label>
             <input
-              class="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              className="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
               name="User_Email"
               onBlur={handleBlur}
               type="email"
@@ -180,15 +180,15 @@ const SignUp = () => {
             />
             {emailError && <p className="text-red-500">Email not validate</p>}
           </div>
-          <div class="w-full px-3">
+          <div className="w-full px-3">
             <label
-              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
               htmlFor="Mobile_No"
             >
               Mobile Number
             </label>
             <input
-              class="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              className="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
               type="number"
               onBlur={handleBlur}
               name="Mobile_No"
@@ -199,15 +199,15 @@ const SignUp = () => {
               <p className="text-red-500">Phone Number not validate</p>
             )}
           </div>
-          <div class="w-full px-3">
+          <div className="w-full px-3">
             <label
-              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
               htmlFor="pass_word"
             >
               Password
             </label>
             <input
-              class="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              className="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
               name="pass_word"
               onBlur={handleBlur}
               type="password"
@@ -217,11 +217,11 @@ const SignUp = () => {
             {passwordError && (
               <p className="text-red-500">password not validate</p>
             )}
-            <div class="md:w-2/3"></div>
+            <div className="md:w-2/3"></div>
           </div>
         </div>
         <div className="text-center">
-          <button class="btn w-full max-w-xs" type="submit">
+          <button className="btn w-full max-w-xs" type="submit">
             Sign Up
           </button>
           <p className="mt-4 mb-5">

@@ -1,19 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye } from '@fortawesome/free-solid-svg-icons';
-import Moment from 'react-moment';
-import ReactPaginate from 'react-paginate';
-import { Link } from 'react-router-dom';
-// import httpServices from '../../Services/http.service';
+import React, { useEffect, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye } from "@fortawesome/free-solid-svg-icons";
+import Moment from "react-moment";
+import ReactPaginate from "react-paginate";
+import { Link } from "react-router-dom";
 
 const AccountStatus = () => {
   const [lost_card, setLost_card] = useState(false);
-  // const { public_api } = httpServices;
 
-  const url = 'http://localhost:3000/rfidtbl/97466';
+  const url = "http://localhost:5000/rfidtbl/97466";
   const [users, setUsers] = useState([]);
   useEffect(() => {
-    fetch('http://localhost:3000/rfidtbl/97466')
+    fetch(url)
+      .then((res) => res.json())
       .then((data) => setUsers(data.Rfidtbl))
       .catch((err) => {
         console.log(err);
@@ -30,58 +29,58 @@ const AccountStatus = () => {
     setPageNumber(selected);
   };
 
-  // apis.get('/auth/regiester')
-
   return (
     <div>
       {/* ---------------- Table Area Start -------------------------- */}
-      <div className="overflow-x-auto px-28 mt-5">
+      <div className="overflow-x-auto px-8 mt-5">
         {/*---------------------------------- mostofa eidited start--------------------------------- */}
         {/* ----------------Table start -------------------------- */}
-        <div className="overflow-x-auto border border-slate-400 rounded-lg">
-          <table class="min-w-full leading-normal text-center">
-            <thead className="bg-gray-200 text-[13px] text-slate-900">
-              <tr>
-                <th class="px-2 py-5 border border-slate-300 font-semibold uppercase tracking-wider">
-                  Card type
-                </th>
-                <th class="px-2 py-5 border border-slate-300 font-semibold uppercase tracking-wider">
-                  Card id
-                </th>
-                <th class="px-2 py-5 border border-slate-300 font-semibold uppercase tracking-wider">
-                  Last recharge date
-                </th>
-                <th class="px-2 py-5 border border-slate-300 font-semibold uppercase tracking-wider">
-                  Last recharge amount
-                </th>
-                <th class="px-2 py-5 border border-slate-300 font-semibold uppercase tracking-wider">
-                  balance
-                </th>
-                <th class="px-2 py-5 border border-slate-300 font-semibold uppercase tracking-wider">
-                  recharge
-                </th>
-                <th class="px-2 py-5 border border-slate-300 font-semibold uppercase tracking-wider">
-                  mark lost
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {/* -- table row  -- */}
+        <div className="overflow-x-auto relative text-center shadow-md sm:rounded-lg">
+              <table className="w-full text-sm text-gray-500 dark:text-gray-400">
+                <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                  <tr>
+                    <th scope="col" className="py-3 px-6">
+                    Card type
+                    </th>
+                    <th scope="col" className="py-3 px-6">
+                    Card id
+                    </th>
+                    <th scope="col" className="py-3 px-6">
+                    Last recharge date
+                    </th>
+                    <th scope="col" className="py-3 px-6">
+                    Last recharge amount
+                    </th>
+
+                    <th scope="col" className="py-3 px-6">
+                    balance
+                    </th>
+                    <th scope="col" className="py-3 px-6">
+                    recharge
+                    </th>
+
+                    <th scope="col" className="py-3 px-6">
+                    mark lost
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {/* -- table row  -- */}
               {displayPages.map((item, index) => {
                 return (
                   <tr>
                     <td className="py-2 border border-slate-300 bg-white text-sm">
-                      <p class="text-gray-900 whitespace-no-wrap">
+                      <p className="text-gray-900 whitespace-no-wrap">
                         {item.Device_Type}
                       </p>
                     </td>
                     <td className="py-2 border border-slate-300 bg-white text-sm">
-                      <p class="text-gray-900 whitespace-no-wrap">
+                      <p className="text-gray-900 whitespace-no-wrap">
                         {item.User_ID}
                       </p>
                     </td>
                     <td className="py-2 border border-slate-300 bg-white text-sm">
-                      <p class="text-gray-900 whitespace-no-wrap">
+                      <p className="text-gray-900 whitespace-no-wrap">
                         {
                           <Moment format="DD/MM/YYYY">
                             {item.Expire_Date}
@@ -90,17 +89,17 @@ const AccountStatus = () => {
                       </p>
                     </td>
                     <td className="py-2 border border-slate-300 bg-white text-sm">
-                      <p class="text-gray-900 whitespace-no-wrap">
+                      <p className="text-gray-900 whitespace-no-wrap">
                         {item.last_recharge_amount}
                       </p>
                     </td>
                     <td className="py-2 border border-slate-300 bg-white text-sm">
-                      <p class="text-gray-900 whitespace-no-wrap">
+                      <p className="text-gray-900 whitespace-no-wrap">
                         {item.Balance}
                       </p>
                     </td>
                     <td className="py-2 border border-slate-300 bg-white text-sm">
-                      <p class="text-gray-900 whitespace-no-wrap">
+                      <p className="text-gray-900 whitespace-no-wrap">
                         <Link to="/recharge">
                           <p className="btn btn-sm">
                             <small>Click</small>
@@ -111,14 +110,14 @@ const AccountStatus = () => {
                     <td className="py-2 border border-slate-300 bg-white text-sm">
                       <label
                         htmlFor="lost-card-modal"
-                        class="text-gray-900 whitespace-no-wrap"
+                        className="text-gray-900 whitespace-no-wrap"
                       >
                         <FontAwesomeIcon
                           icon={faEye}
                           style={{
-                            cursor: 'pointer',
-                            margin: 'auto',
-                            fontSize: '18px',
+                            cursor: "pointer",
+                            margin: "auto",
+                            fontSize: "18px",
                           }}
                         />
                       </label>
@@ -126,21 +125,21 @@ const AccountStatus = () => {
                   </tr>
                 );
               })}
-            </tbody>
-          </table>
-        </div>
+                </tbody>
+              </table>
+            </div>
         {/* ----------------ReactPaginate-------------------------- */}
         <div className="grid place-content-center mt-5">
           <ReactPaginate
-            previousLabel={'Previous'}
+            previousLabel={"Previous"}
             pageCount={pageCount}
-            nextLabel={'Next'}
+            nextLabel={"Next"}
             onPageChange={changePage}
-            containerClassName={'paginationBttns'}
-            previousLinkClassName={'previousBttn'}
-            nextLinkClassName={'nextBttn'}
-            disabledClassName={'paginationDisabled'}
-            activeClassName={'paginationActive'}
+            containerClassName={"paginationBttns"}
+            previousLinkClassName={"previousBttn"}
+            nextLinkClassName={"nextBttn"}
+            disabledClassName={"paginationDisabled"}
+            activeClassName={"paginationActive"}
           />
         </div>
         {/* ----------------Table End-------------------------- */}
@@ -188,7 +187,7 @@ const AccountStatus = () => {
                       </div>
                       <button
                         type="submit"
-                        className="mt-10 mb-10 inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-20 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                        className="mt-10 inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-20 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                       >
                         Confirm
                       </button>
@@ -232,58 +231,59 @@ const AccountStatus = () => {
                   Balance Transfer
                 </h2>
                 {/*-------------------------Balance Transfer Card Model Form Start ---------------*/}
-                <form className="flex gap-2 mt-5">
+                <form className="mt-5 text-center">
                   {/* --------------------------------------select lost start--------------------------------- */}
-                  <div>
-                    <select
-                      name="select_card_type"
-                      className="select select-bordered max-w-xs mb-5 rounded"
-                    >
-                      <option disabled selected>
-                        Lost Card
-                      </option>
-                      <option value="etc">
-                        00002202 <span>Etc</span>
-                      </option>
-                      <option value="rf">
-                        00002202 <span>RfId</span>
-                      </option>
-                      <option value="etc">
-                        00002202 <span>Etc</span>
-                      </option>
-                    </select>
+                  <div className="inline-flex gap-2 mr-2">
+                    <div>
+                      <select
+                        name="select_card_type"
+                        className="select select-bordered max-w-xs mb-5 rounded"
+                      >
+                        <option disabled selected>
+                          Lost Card
+                        </option>
+                        <option value="etc">
+                          00002202 <span>Etc</span>
+                        </option>
+                        <option value="rf">
+                          00002202 <span>RfId</span>
+                        </option>
+                        <option value="etc">
+                          00002202 <span>Etc</span>
+                        </option>
+                      </select>
+                    </div>
+                    {/* --------------------------------------select lost card end--------------------------------- */}
+                    {/* --------------------------------------select active card start--------------------------------- */}
+                    <div>
+                      <select
+                        name="select_card"
+                        className="select select-bordered max-w-xs mb-5 rounded"
+                      >
+                        <option disabled selected>
+                          Active Card
+                        </option>
+                        <option value="etc">
+                          00002202 <span>Etc</span>
+                        </option>
+                        <option value="rf">
+                          00002202 <span>RfId</span>
+                        </option>
+                        <option value="etc">
+                          00002202 <span>Etc</span>
+                        </option>
+                      </select>
+                    </div>
+                    {/* --------------------------------------select active card end--------------------------------- */}
                   </div>
-                  {/* --------------------------------------select lost card end--------------------------------- */}
-                  {/* --------------------------------------select active card start--------------------------------- */}
-                  <div>
-                    <select
-                      name="select_card"
-                      className="select select-bordered max-w-xs mb-5 rounded"
-                    >
-                      <option disabled selected>
-                        Active Card
-                      </option>
-                      <option value="etc">
-                        00002202 <span>Etc</span>
-                      </option>
-                      <option value="rf">
-                        00002202 <span>RfId</span>
-                      </option>
-                      <option value="etc">
-                        00002202 <span>Etc</span>
-                      </option>
-                    </select>
-                  </div>
-                  {/* --------------------------------------select active card end--------------------------------- */}
-                  <div>
-                    <button
-                      type="submit"
-                      className="btn btn-success bg-[#36D399]"
-                    >
-                      Confirm
-                    </button>
-                  </div>
+                  <button
+                    type="submit"
+                    className="btn btn-success bg-[#36D399]"
+                  >
+                    Confirm
+                  </button>
                 </form>
+                
                 {/*-------------------------Balance TransferCard Model Form End ---------------*/}
                 <label
                   htmlFor="balance-transfer"
