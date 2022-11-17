@@ -1,10 +1,10 @@
 // import { useState } from "react";
-import { Link, useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import { public_api } from '../../Services/http.service';
+import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { public_api } from "../../Services/http.service";
 // import Navbar from "./Navbar";
 const Login = () => {
-  // console.log(client)
   const navigate = useNavigate();
   // const handleUserSignIn = (event) => {
   //   event.preventDefault();
@@ -46,21 +46,28 @@ const Login = () => {
 
   const handleUserSignIn = (event) => {
     event.preventDefault();
-    console.log('hit');
+    // console.log("hit");
     public_api
-      .post('auth/login', {
+      .post("auth/login", {
         email: event.target.email.value,
         password: event.target.password.value,
       })
-      .then(function (response) {
-        console.log(response);
+      .then((data) => {
+        let token = data.data.data.token;
+        localStorage.setItem("SavedToken", "Bearer" + token);
+        navigate("/status");
+        // window.location.reload();
+        toast.success("Sign In Successfully");
+        // let UserInfo = data;
+        // console.log(UserInfo);
+        // localStorage.setItem("user_data", JSON.stringify(UserInfo));
       })
       .catch(function (error) {
         console.log(error);
       });
   };
   return (
-    <div className="my-8">
+    <div className="my-8 dark:text-white dark:bg-gray-900 " style = {{height:"100vh"}}>
       {/* Login form start */}
       <form
         onSubmit={handleUserSignIn}
@@ -81,28 +88,28 @@ const Login = () => {
         {/* Phone field start */}
         <div className="form-control w-full max-w-xs mb-4">
           <label className="label">
-            <span className="label-text">Email</span>
+            <span className="label-text dark:text-white ">Phone Number</span>
           </label>
           <input
             // onChange={(e) => setMobile_No(e.target.value)}
             name="email"
             type="email"
             placeholder="Enter Your Phone Number"
-            className="input input-bordered w-full max-w-xs"
+            className="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
           />
         </div>
         {/* Phone field end */}
         {/* Password field start */}
-        <div className="form-control w-full max-w-xs mb-4">
+        <div className="form-control w-full rounded-md max-w-xs mb-4">
           <label className="label">
-            <span className="label-text">Password</span>
+            <span className="label-text dark:text-white">Password</span>
           </label>
           <input
             // onChange={(e) => setPass_word(e.target.value)}
             name="password"
             type="password"
             placeholder="Enter Your Password"
-            className="input input-bordered w-full max-w-xs"
+            className="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
           />
         </div>
         {/* Password field end */}
@@ -113,7 +120,7 @@ const Login = () => {
             <span className="pl-2">Remember</span>
           </div> */}
           <p className="">
-            <button className="link">
+            <button className="link dark:text-white">
               <Link to="">Forgot Password?</Link>
             </button>
           </p>
@@ -127,7 +134,7 @@ const Login = () => {
         {/* Error message start */}
         {/* Error message end */}
         {/* SignUp forward link start */}
-        <p className="mt-2">
+        <p className="mt-2 dark:text-white">
           New to Karnafuli Tunnel?
           <Link to="/signup" className="text-[#0B5ED7] pl-2">
             Create an account

@@ -1,19 +1,20 @@
 import React from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Loading from "./Loading";
-
-const Navbar = () => {
+const Navbar = (props) => {
+  const [navbar, setNavbar] = useState(false);
   const navigate = useNavigate();
   let logout = () => {
-    if (localStorage.removeItem("token")) {
-      <Loading></Loading>;
-      navigate("/login");
-    }
+    localStorage.removeItem("SavedToken");
+    navigate("/login");
   };
+
+  const [darkToggle, setDarkToggle] = useState(false);
+  const [enabled, setEnabled] = useState(false);
   return (
     <>
       {/* Navbar start */}
-      <div className="navbar bg-neutral text-neutral-content shadow">
+      {/* <div className="navbar bg-neutral text-neutral-content shadow">
         <div className="navbar-start">
           <div className="dropdown">
             <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -33,18 +34,18 @@ const Navbar = () => {
             </label>
             <ul
               tabIndex="0"
-              className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+              className="menu menu-compact dropdown-content mt-3 p-2 shadow dark:bg-white bg-base-100 rounded-box w-52"
             >
-              <li className="text-neutral">
-                <Link to="/status">Account Status</Link>
+              <li className="text-black dark:text-black">
+                <Link to={`/status/${id}`}>Account Status</Link>
               </li>
-              <li className="text-neutral">
+              <li className="text-black dark:text-black">
                 <Link to="/history">Account History</Link>
               </li>
-              <li className="text-neutral">
+              <li className="text-black dark:text-black">
                 <Link to="/recharge">Recharge</Link>
               </li>
-              <li className="text-neutral">
+              <li className="text-black dark:text-black">
                 <Link to="/QA">QA</Link>
               </li>
             </ul>
@@ -58,7 +59,7 @@ const Navbar = () => {
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal p-0 gap-4">
             <li>
-              <Link to="/status">Account Status</Link>
+              <Link to={`/status/${id}`}>Account Status</Link>
             </li>
             <li>
               <Link to="/history">Account History</Link>
@@ -73,7 +74,7 @@ const Navbar = () => {
         </div>
 
         <div className="navbar-end">
-          {localStorage.getItem("token") ? (
+          {localStorage.getItem("SavedToken") ? (
             <Link onClick={logout} className="cursor-pointer btn">
               Log out
             </Link>
@@ -83,8 +84,10 @@ const Navbar = () => {
             </Link>
           )}
         </div>
-      </div>
+      </div> */}
       {/* Navbar end */}
+
+      
     </>
   );
 };

@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
 const AccountHistory = () => {
+
   const [state, setData] = useState();
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -12,7 +14,7 @@ const AccountHistory = () => {
   };
 
   return (
-    <div>
+    <div style = {{height:"100vh"}}>
       {/* --------------------------------------hAmount History page start--------------------------------- */}
       <div className="history-page container mx-auto px-8 mt-2">
         <h1 className="text-center text-2xl font-bold mt-5 mb-5">
@@ -27,7 +29,7 @@ const AccountHistory = () => {
             <div>
               <select
                 name="select_card"
-                className="select select-bordered max-w-xs mb-5 rounded"
+                className="select select-bordered max-w-xs mb-5 rounded dark:bg-gray-700"
               >
                 <option disabled selected>
                   Select Card
@@ -48,7 +50,7 @@ const AccountHistory = () => {
             <div>
               <select
                 name="select_history_type"
-                className="select select-bordered max-w-xs mb-5 rounded"
+                className="select select-bordered max-w-xs mb-5 rounded dark:bg-gray-700 "
               >
                 <option disabled selected>
                   Select Type History

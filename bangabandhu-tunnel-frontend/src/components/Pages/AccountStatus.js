@@ -3,70 +3,92 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import Moment from "react-moment";
 import ReactPaginate from "react-paginate";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { api } from "../../Services/http.service";
+import Loading from "./Loading";
+import useUser from "../Hooks/useUser";
+import axiosPrivate from "../../api/axiosPrivate";
+import axios from "axios";
+// import useCard from "../Hooks/useCard";
 
 const AccountStatus = () => {
-  const [lost_card, setLost_card] = useState(false);
+  // const [user] = useUser();
+  // const id = user.id;
 
-  const url = "http://localhost:5000/rfidtbl/97466";
-  const [users, setUsers] = useState([]);
+  const [lost_card, setLost_card] = useState(false);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [cards, setCards] = useState([]);
+  // console.log(cards);
+
   useEffect(() => {
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => setUsers(data.Rfidtbl))
-      .catch((err) => {
-        console.log(err);
-      });
+    setLoading(true);
+    const getUser = async () => {
+      try {
+        const { data } = await api.get(`user/cards/`); // user api end point eg. http://localhost:4000/api/v1/user/cards/id
+        setCards(data.data.cardtbls); //on success!
+        // console.log(data.data.cardtbls);
+        setLoading(false);
+      } catch (error) {
+        setError(error.message); //error
+        setLoading(false);
+      }
+    };
+    getUser();
   }, []);
 
-  const [pageNumber, setPageNumber] = useState(0);
-  const perPage = 4;
-  const pageVisited = pageNumber * perPage;
-  //1->6
-  const displayPages = users.slice(pageVisited, pageVisited + perPage);
-  const pageCount = Math.ceil(users.length / perPage);
-  const changePage = ({ selected }) => {
-    setPageNumber(selected);
-  };
+  // const [pageNumber, setPageNumber] = useState(0);
+  // const perPage = 4;
+  // const pageVisited = pageNumber * perPage;
+  // //1->6
+  // const displayPages = cards.slice(pageVisited, pageVisited + perPage);
+  // const pageCount = Math.ceil(cards.length / perPage);
+  // const changePage = ({ selected }) => {
+  //   setPageNumber(selected);
+  // };
 
   return (
-    <div>
+    <div style = {{height:"100vh"}}>
       {/* ---------------- Table Area Start -------------------------- */}
       <div className="overflow-x-auto px-8 mt-5">
         {/*---------------------------------- mostofa eidited start--------------------------------- */}
         {/* ----------------Table start -------------------------- */}
+        <h2 className="mb-5 text-center font-bold text-[20px]">
+          {/* Welcome {user.User_FirstName} {user.User_LastName} */}
+        </h2>
         <div className="overflow-x-auto relative text-center shadow-md sm:rounded-lg">
-              <table className="w-full text-sm text-gray-500 dark:text-gray-400">
-                <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                  <tr>
-                    <th scope="col" className="py-3 px-6">
-                    Card type
-                    </th>
-                    <th scope="col" className="py-3 px-6">
-                    Card id
-                    </th>
-                    <th scope="col" className="py-3 px-6">
-                    Last recharge date
-                    </th>
-                    <th scope="col" className="py-3 px-6">
-                    Last recharge amount
-                    </th>
+          <table className="w-full text-sm text-gray-500 dark:text-white border">
+            <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-white">
+              <tr>
+                <th scope="col" className="py-3 px-6">
+                  Card type
+                </th>
+                <th scope="col" className="py-3 px-6">
+                  Card id
+                </th>
+                <th scope="col" className="py-3 px-6">
+                  Last recharge date
+                </th>
+                <th scope="col" className="py-3 px-6">
+                  Last recharge amount
+                </th>
 
-                    <th scope="col" className="py-3 px-6">
-                    balance
-                    </th>
-                    <th scope="col" className="py-3 px-6">
-                    recharge
-                    </th>
+                <th scope="col" className="py-3 px-6">
+                  balance
+                </th>
+                <th scope="col" className="py-3 px-6">
+                  recharge
+                </th>
 
-                    <th scope="col" className="py-3 px-6">
-                    mark lost
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {/* -- table row  -- */}
-              {displayPages.map((item, index) => {
+                <th scope="col" className="py-3 px-6">
+                  mark lost
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {/* -- table row  -- */}
+
+              {cards.map((item, index) => {
                 return (
                   <tr>
                     <td className="py-2 border border-slate-300 bg-white text-sm">
@@ -76,7 +98,7 @@ const AccountStatus = () => {
                     </td>
                     <td className="py-2 border border-slate-300 bg-white text-sm">
                       <p className="text-gray-900 whitespace-no-wrap">
-                        {item.User_ID}
+                        {item.id}
                       </p>
                     </td>
                     <td className="py-2 border border-slate-300 bg-white text-sm">
@@ -90,12 +112,12 @@ const AccountStatus = () => {
                     </td>
                     <td className="py-2 border border-slate-300 bg-white text-sm">
                       <p className="text-gray-900 whitespace-no-wrap">
-                        {item.last_recharge_amount}
+                        {item.last_chargeamounte}
                       </p>
                     </td>
                     <td className="py-2 border border-slate-300 bg-white text-sm">
                       <p className="text-gray-900 whitespace-no-wrap">
-                        {item.Balance}
+                        {item.amount}
                       </p>
                     </td>
                     <td className="py-2 border border-slate-300 bg-white text-sm">
@@ -125,11 +147,11 @@ const AccountStatus = () => {
                   </tr>
                 );
               })}
-                </tbody>
-              </table>
-            </div>
+            </tbody>
+          </table>
+        </div>
         {/* ----------------ReactPaginate-------------------------- */}
-        <div className="grid place-content-center mt-5">
+        {/* <div className="grid place-content-center mt-5">
           <ReactPaginate
             previousLabel={"Previous"}
             pageCount={pageCount}
@@ -141,7 +163,7 @@ const AccountStatus = () => {
             disabledClassName={"paginationDisabled"}
             activeClassName={"paginationActive"}
           />
-        </div>
+        </div> */}
         {/* ----------------Table End-------------------------- */}
 
         {/*---------------------------------- mostofa eidited start--------------------------------- */}
@@ -162,16 +184,16 @@ const AccountStatus = () => {
               role="alert"
               className="container mx-auto w-11/12 md:w-2/3 max-w-lg"
             >
-              <div className="relative py-8 px-5 md:px-10 bg-white shadow-md rounded-lg border border-gray-400">
+              <div className="relative py-8 px-5 md:px-10 dark:text-white bg-white dark:bg-gray-900 shadow-md rounded-lg border border-gray-400">
                 {/*-------------------------Add Card Model Form Start ---------------*/}
                 <form action="#" method="POST">
                   <div className="overflow-hidden sm:rounded-md text-center">
-                    <div className="bg-white px-4 py-5 sm:p-6">
+                    <div className="dark:text-white bg-white dark:bg-gray-900 px-4 py-5 sm:p-6">
                       <div className="grid grid-cols-1 gap-6">
                         <div className="col-span-6 sm:col-span-3">
                           <label
                             htmlFor="card-number"
-                            className="block text-sm font-medium text-gray-900 mb-4"
+                            className="block text-sm font-medium dark:text-white mb-4"
                           >
                             Enter Your Card Number
                           </label>
@@ -181,7 +203,7 @@ const AccountStatus = () => {
                             id="card-number"
                             autoComplete="card-number"
                             placeholder="xxxxxxxxxx"
-                            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                            className="mt-1 block w-full dark:text-black rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                           />
                         </div>
                       </div>
@@ -226,7 +248,7 @@ const AccountStatus = () => {
               role="alert"
               className="container mx-auto w-11/12 md:w-2/3 max-w-lg"
             >
-              <div className="relative py-8 px-5 md:px-10 bg-white shadow-md rounded-lg border border-gray-400">
+              <div className="relative py-8 px-5 md:px-10 bg-white dark:text-white dark:bg-gray-900 shadow-md rounded-lg border border-gray-400">
                 <h2 className="text-center text-[18px] font-black">
                   Balance Transfer
                 </h2>
@@ -237,7 +259,7 @@ const AccountStatus = () => {
                     <div>
                       <select
                         name="select_card_type"
-                        className="select select-bordered max-w-xs mb-5 rounded"
+                        className="select select-bordered border-gray-300 max-w-xs mb-5 rounded dark:bg-gray-900"
                       >
                         <option disabled selected>
                           Lost Card
@@ -258,7 +280,7 @@ const AccountStatus = () => {
                     <div>
                       <select
                         name="select_card"
-                        className="select select-bordered max-w-xs mb-5 rounded"
+                        className="select select-bordered border-gray-300 max-w-xs mb-5 rounded dark:bg-gray-900"
                       >
                         <option disabled selected>
                           Active Card
@@ -283,7 +305,7 @@ const AccountStatus = () => {
                     Confirm
                   </button>
                 </form>
-                
+
                 {/*-------------------------Balance TransferCard Model Form End ---------------*/}
                 <label
                   htmlFor="balance-transfer"

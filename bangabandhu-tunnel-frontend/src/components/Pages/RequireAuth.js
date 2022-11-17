@@ -1,20 +1,17 @@
-import { Navigate, useLocation } from 'react-router-dom';
+import { Navigate, useLocation } from "react-router-dom";
 
+const RequireAuth = ({ children }) => {
+  // const [user, loading] = useAuthState(auth);
+  const location = useLocation();
 
-const RequireAuth = ({children}) =>{
+  // if(loading){
+  //     return <Loading></Loading>
+  // }
 
-        // const [user, loading] = useAuthState(auth);
-        const location = useLocation()
-
-        // if(loading){
-        //     return <Loading></Loading>
-        // }
-
-        if(!localStorage.getItem('token')){
-            return <Navigate to="/login" state={{ from: location }} replace></Navigate>;
-        }
-    return children;
-
-}
+  if (!localStorage.getItem("SavedToken")) {
+    return <Navigate to="/login" state={{ from: location }} replace></Navigate>;
+  }
+  return children;
+};
 
 export default RequireAuth;

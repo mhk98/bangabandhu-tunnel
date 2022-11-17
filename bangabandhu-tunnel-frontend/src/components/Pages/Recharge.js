@@ -1,22 +1,18 @@
-import React, { useEffect } from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
-import auth from "../../firebase";
-import visa from "../../images/visa.png";
-import mastercard from "../../images/mastercard.png";
-import payoneer from "../../images/payoneer.png";
-import paypal from "../../images/paypal.png";
-import bkash from "../../images/bkash.png";
-import nogod from "../../images/nogod.png";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useEffect } from 'react';
+import visa from '../../images/visa.png';
+import mastercard from '../../images/mastercard.png';
+import payoneer from '../../images/payoneer.png';
+import paypal from '../../images/paypal.png';
+import bkash from '../../images/bkash.png';
+import nogod from '../../images/nogod.png';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faCashRegister,
-  faCheck,
   faCheckCircle,
   faCircleXmark,
-  faXmarkCircle,
-} from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+} from '@fortawesome/free-solid-svg-icons';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+// import axios from 'axios';
 
 const Recharge = () => {
   const [agree, setAgree] = useState(false);
@@ -28,14 +24,14 @@ const Recharge = () => {
     event.preventDefault();
     const info = {
       card: event.target.card.value,
-      amount: event.target.amount.value,
+      amount: event.target.card.value,
     };
     // const email = user?.email;
 
-    fetch("http://localhost:4000/ssl-request", {
-      method: "POST",
+    fetch('http://localhost:4000/api/v1/sslcommerz/ssl-request', {
+      method: 'POST',
       headers: {
-        "content-type": "application/json",
+        'content-type': 'application/json',
       },
       body: JSON.stringify(info),
     })
@@ -45,25 +41,39 @@ const Recharge = () => {
           window.open(data);
         }
       });
+
+    // const {
+    //   data: { data },
+    // } = await axios.post(
+    //   'http://localhost:4000/api/v1/ssl-request',
+    //   info,
+    //   config,
+    // );
+    // await window.location.replace(data?.GatewayPageURL);
   };
 
-  useEffect(() => {
-    fetch("http://localhost:4000/ssl-payment-success")
-      .then((res) => res.json())
-      .then((data) => console.log("data", data));
-  }, []);
+  // useEffect(() => {
+  //   fetch('http://localhost:4000/api/v1/ssl-payment-success')
+  //     .then((res) => res.json())
+  //     .then((data) => console.log('data', data));
+  // }, []);
 
   return (
-    <div className="mt-8 grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 place-content-center mx-auto w-full">
+    <div
+      className="mt-8 grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 place-content-center mx-auto w-full"
+      style={{ height: '100vh' }}
+    >
       <div className="w-full">
-        <h2 className="text-2xl font-bold text-center">Recharge</h2>
+        <h2 className="text-2xl font-bold text-center  dark:text-gray-100">
+          Recharge
+        </h2>
 
         <form
           className="flex flex-col items-center justify-center"
           onSubmit={handleCheckout}
         >
           <div className="form-control w-full max-w-xs mb-2 mt-5">
-            <select className="select select-bordered w-full max-w-xs">
+            <select className="select select-bordered w-full max-w-xs dark:bg-gray-700">
               <option disabled selected>
                 Select Your Card Type
               </option>
@@ -73,25 +83,29 @@ const Recharge = () => {
           </div>
           <div className="form-control w-full max-w-xs mb-4">
             <label className="label">
-              <span className="label-text font-bold">Card Number</span>
+              <span className="label-text font-bold dark:text-white">
+                Card Number
+              </span>
             </label>
             <input
               type="number"
               name="card"
               placeholder="Enter Your Card Number"
-              className="input input-bordered w-full max-w-xs"
+              className="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
               required
             />
           </div>
           <div className="form-control w-full max-w-xs mb-4">
             <label className="label">
-              <span className="label-text font-bold">Amount</span>
+              <span className="label-text font-bold dark:text-white">
+                Amount
+              </span>
             </label>
             <input
               type="number"
               name="amount"
               placeholder="Enter Your Amount"
-              className="input input-bordered w-full max-w-xs"
+              className="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
               required
             />
           </div>
@@ -99,7 +113,7 @@ const Recharge = () => {
             <input type="checkbox" id="agree" onChange={checkboxHandler} />
             <label htmlFor="agree" className="ml-2">
               <b>
-                I Agree To{" "}
+                I Agree To{' '}
                 <Link to="/terms-and-conditions" className="link">
                   Terms and Conditions
                 </Link>
@@ -108,15 +122,15 @@ const Recharge = () => {
           </div>
           <input
             disabled={!agree}
-            className="btn w-full max-w-xs flex justify-center"
+            className="btn w-full bg-black max-w-xs flex justify-center"
             type="submit"
-            defaultValue="Submit"
+            value="Submit"
           />
         </form>
       </div>
 
       <div className="w-96 mt-16">
-        <div className="bg-[#F5F5F5] w-full mt-4 p-6 rounded">
+        <div className="bg-[#F5F5F5] w-full mt-4 p-6 rounded dark:bg-slate-700 dark:text-white">
           <h3 className="text-xl font-bold mb-2">Online Payment</h3>
           <div className="flex gap-4 items-center justify-center w-full">
             <img className="w-12 h-12" src={visa} alt="" />
@@ -135,7 +149,7 @@ const Recharge = () => {
         </label>
         <input type="checkbox" id="payment-success" className="modal-toggle" />
         <div className="modal modal-bottom sm:modal-middle">
-          <div className="modal-box">
+          <div className="modal-box dark:bg-slate-700 dark:text-white">
             <div className="text-center">
               <FontAwesomeIcon
                 className="text-5xl text-green-700 mb-4"
@@ -190,7 +204,7 @@ const Recharge = () => {
           className="modal-toggle"
         />
         <div className="modal modal-bottom sm:modal-middle">
-          <div className="modal-box">
+          <div className="modal-box dark:bg-slate-700 dark:text-white">
             <div className="text-center">
               <FontAwesomeIcon
                 className="text-5xl text-red-700 mb-4"

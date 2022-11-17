@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const SignUp = () => {
   const navigate = useNavigate();
-  const [pass_word, setPass_word] = useState('');
+  const [pass_word, setPass_word] = useState("");
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
   const [MobileNoError, setMobileNoError] = useState(false);
@@ -12,7 +12,7 @@ const SignUp = () => {
 
   const handleBlur = (e) => {
     let isFieldValid = true;
-    if (e.target.name === 'User_Email') {
+    if (e.target.name === "User_Email") {
       isFieldValid = /\S+@\S+\.\S+/.test(e.target.value);
       if (!isFieldValid) {
         setEmailError(true);
@@ -21,7 +21,7 @@ const SignUp = () => {
       }
     }
 
-    if (e.target.name === 'Mobile_No') {
+    if (e.target.name === "Mobile_No") {
       isFieldValid = /^(?:(?:\+|00)88|01)?\d{11}$/.test(e.target.value);
       if (!isFieldValid) {
         setMobileNoError(true);
@@ -29,7 +29,7 @@ const SignUp = () => {
         setMobileNoError(false);
       }
     }
-    if (e.target.name === 'pass_word') {
+    if (e.target.name === "pass_word") {
       const isPasswordValid = e.target.value.length > 6;
       const passwordHasNumber = /\d{1}/.test(e.target.value);
       isFieldValid = isPasswordValid && passwordHasNumber;
@@ -55,13 +55,13 @@ const SignUp = () => {
       User_Email: event.target.User_Email.value,
       Mobile_No: event.target.Mobile_No.value,
       pass_word: event.target.pass_word.value,
-      User_role: 'user',
+      User_role: "user",
     };
 
-    fetch('http://localhost:5000/signup', {
-      method: 'POST',
+    fetch("http://localhost:5000/signup", {
+      method: "POST",
       headers: {
-        'content-type': 'application/json',
+        "content-type": "application/json",
       },
       body: JSON.stringify(newUser),
     })
@@ -72,12 +72,12 @@ const SignUp = () => {
         }
       });
 
-    toast.success('Sign Up Successfully');
-    navigate('/otp');
+    toast.success("Sign Up Successfully");
+    navigate("/otp");
   };
 
   return (
-    <div className="my-4 grid place-content-center">
+    <div className="my-4 grid place-content-center" style = {{height:"100vh"}}>
       {/* <h2 className="text-center text-2xl font-bold">Sign Up</h2> */}
 
       {/* SignUp form start */}
@@ -93,7 +93,7 @@ const SignUp = () => {
         <div className="flex flex-wrap -mx-3 mb-6">
           <div className="w-full px-3">
             <label
-              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              className="block uppercase tracking-wide text-gray-700 text-xs dark:text-gray-100 font-bold mb-2"
               htmlFor="card-id"
             >
               Card ID
@@ -108,7 +108,7 @@ const SignUp = () => {
           <div className="w-full px-3">
             <label
               for="card-type"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400"
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-100"
             >
               Card Type
             </label>
@@ -121,7 +121,7 @@ const SignUp = () => {
               <option value="rfid">RFID</option>
             </select>
             <div className="text-center mt-4">
-              <h2 className="block uppercase tracking-wide text-gray-700 text-xs font-bold">
+              <h2 className="block uppercase tracking-wide text-gray-700 dark:text-gray-100 text-xs font-bold">
                 Available Balance : 500
               </h2>
             </div>
@@ -129,9 +129,9 @@ const SignUp = () => {
         </div>
         {/*---------------------------------- mostofa eidited end--------------------------------- */}
         <div className="flex flex-wrap -mx-3">
-          <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+          <div className="w-full md:w-1/2 px-3">
             <label
-              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              className="block uppercase tracking-wide text-gray-700 text-xs font-bold dark:text-gray-100 mb-2"
               htmlFor="User_FirstName"
             >
               First Name
@@ -147,7 +147,7 @@ const SignUp = () => {
           </div>
           <div className="w-full md:w-1/2 px-3">
             <label
-              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              className="block uppercase tracking-wide text-gray-700 text-xs font-bold dark:text-gray-100 mb-2"
               htmlFor="User_LastName"
             >
               Last Name
@@ -165,7 +165,7 @@ const SignUp = () => {
         <div className="flex flex-wrap -mx-3">
           <div className="w-full px-3">
             <label
-              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              className="block uppercase tracking-wide text-gray-700 dark:text-gray-100 text-xs font-bold mt-2 mb-2"
               htmlFor="User_Email"
             >
               Email
@@ -182,13 +182,13 @@ const SignUp = () => {
           </div>
           <div className="w-full px-3">
             <label
-              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              className="block uppercase tracking-wide text-gray-700 dark:text-gray-100 text-xs font-bold mb-2"
               htmlFor="Mobile_No"
             >
               Mobile Number
             </label>
             <input
-              className="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              className="appearance-none block w-full text-gray-700 border dark:text-gray-100 border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
               type="number"
               onBlur={handleBlur}
               name="Mobile_No"
@@ -201,7 +201,7 @@ const SignUp = () => {
           </div>
           <div className="w-full px-3">
             <label
-              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              className="block uppercase tracking-wide text-gray-700 dark:text-gray-100 text-xs font-bold mb-2"
               htmlFor="pass_word"
             >
               Password
@@ -221,10 +221,13 @@ const SignUp = () => {
           </div>
         </div>
         <div className="text-center">
-          <button className="btn w-full max-w-xs" type="submit">
+          <button
+            className="btn w-full max-w-xs bg-black dark:text-white"
+            type="submit"
+          >
             Sign Up
           </button>
-          <p className="mt-4 mb-5">
+          <p className="mt-4 mb-5 dark:text-white">
             Already have an account?
             <Link to="/login" className="text-[#0B5ED7] pl-2">
               login
