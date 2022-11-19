@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye } from "@fortawesome/free-solid-svg-icons";
-import Moment from "react-moment";
-import ReactPaginate from "react-paginate";
-import { Link, useParams } from "react-router-dom";
-import { api } from "../../Services/http.service";
-import Loading from "./Loading";
-import useUser from "../Hooks/useUser";
-import axiosPrivate from "../../api/axiosPrivate";
-import axios from "axios";
+import React, { useEffect, useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye } from '@fortawesome/free-solid-svg-icons';
+import Moment from 'react-moment';
+import ReactPaginate from 'react-paginate';
+import { Link, useParams } from 'react-router-dom';
+import { api } from '../../Services/http.service';
+import Loading from './Loading';
+import useUser from '../Hooks/useUser';
+import axiosPrivate from '../../api/axiosPrivate';
+import axios from 'axios';
 // import useCard from "../Hooks/useCard";
 
 const AccountStatus = () => {
@@ -48,7 +48,7 @@ const AccountStatus = () => {
   // };
 
   return (
-    <div style = {{height:"100vh"}}>
+    <div style={{ height: '100vh' }}>
       {/* ---------------- Table Area Start -------------------------- */}
       <div className="overflow-x-auto px-8 mt-5">
         {/*---------------------------------- mostofa eidited start--------------------------------- */}
@@ -137,9 +137,9 @@ const AccountStatus = () => {
                         <FontAwesomeIcon
                           icon={faEye}
                           style={{
-                            cursor: "pointer",
-                            margin: "auto",
-                            fontSize: "18px",
+                            cursor: 'pointer',
+                            margin: 'auto',
+                            fontSize: '18px',
                           }}
                         />
                       </label>

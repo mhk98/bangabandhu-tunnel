@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
-import jwt_decode from "jwt-decode";
+import { useEffect, useState } from 'react';
+import jwt_decode from 'jwt-decode';
 const useUser = () => {
   const [user, setUser] = useState([]);
-//mostofa ------- edit //
+  //mostofa ------- edit //
   useEffect(() => {
-    let token = localStorage.getItem("SavedToken");
+    let token = localStorage.getItem('SavedToken');
     let user_info = jwt_decode(token);
     if (user_info) {
       console.log(user_info);

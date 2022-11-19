@@ -1,4 +1,4 @@
-import { Navigate, useLocation } from "react-router-dom";
+import { Navigate, useLocation } from 'react-router-dom';
 
 const RequireAuth = ({ children }) => {
   // const [user, loading] = useAuthState(auth);
@@ -8,7 +8,7 @@ const RequireAuth = ({ children }) => {
   //     return <Loading></Loading>
   // }
 
-  if (!localStorage.getItem("SavedToken")) {
+  if (!localStorage.getItem('SavedToken')) {
     return <Navigate to="/login" state={{ from: location }} replace></Navigate>;
   }
   return children;

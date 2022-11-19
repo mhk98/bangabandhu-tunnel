@@ -33,12 +33,14 @@ const Recharge = () => {
       headers: {
         'content-type': 'application/json',
       },
+
       body: JSON.stringify(info),
     })
       .then((res) => res.json())
       .then((data) => {
         if (data) {
-          window.open(data);
+          // console.log(data.data.GatewayPageURL);
+          window.open(data.data.GatewayPageURL);
         }
       });
 
